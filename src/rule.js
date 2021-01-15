@@ -73,3 +73,22 @@
  	return this.element.value.length < arguments[0];
  };
 
+ Rule.prototype.match = function() {
+ 	return this.element.closest('form') && this.element.closest('form').querySelector(arguments[0]) && (this.element.closest('form').querySelector(arguments[0]).value == this.element.value);
+ };
+
+ Rule.prototype.matchName = function() {
+ 	const selector = "[name='"+arguments[0]+"']";
+ 	return this.element.closest('form') && this.element.closest('form').querySelector(selector) && (this.element.closest('form').querySelector(selector).value == this.element.value);
+ };
+
+ Rule.prototype.matchId = function() {
+ 	const selector = "#"+arguments[0];
+ 	return this.element.closest('form') && this.element.closest('form').querySelector(selector) && (this.element.closest('form').querySelector(selector).value == this.element.value);
+ };
+
+ Rule.prototype.password = function() {
+ 	return this.element.value.match(/^[A-Za-z]\w{6,24}$/);
+ };
+
+ export default Rule;

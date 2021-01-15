@@ -23,5 +23,9 @@ const InputRuleMessageException = function(){
 		"minLength": "The :title should be at min :option character",
 		"prefix": "The :title should start with :option",
 		"between": "The :title should be between :option",
+		"match": "The :title should match with :option",
+		"matchName": "The :title should match with :option",
+		"matchId": "The :title should match with :option",
 	};
 };
+export default InputRuleMessageException;
