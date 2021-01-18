@@ -25,6 +25,7 @@
                                 <input 
                                     type="text" 
                                     data-fvalid-type="required|minLength:3|maxLength:12" 
+                                    data-fvalid-transform="XXXX-XXXX-XXXX" 
                                     data-title="First Name"
                                     class="form-control" 
                                     placeholder="First Name *" 
@@ -119,7 +120,26 @@
 
 <script src="../dist/index.js"></script>
 <script>
-    new FValid("form", {
+    // new FValid("form", {
+    //     onInputValid: function(){
+    //         this.classList.remove("is-invalid");
+    //         document.getElementById('message').closest('div.alert').classList.add('d-none');
+    //     },
+    //     onValid: function(){
+    //         alert("Congrats form is valid");
+    //     },
+    //     onInvalid: function(){
+    //         alert("Form is Invalid");
+    //     },
+    //     onInputInvalid: function(message){
+    //         this.classList.add("is-invalid");
+    //         document.getElementById('message').closest('div.alert').classList.remove('d-none');
+    //         document.getElementById('message').innerHTML = message.join("<br>");
+    //     },
+    // });
+
+
+    new FTransform("[name='fname']", {
         onInputValid: function(){
             this.classList.remove("is-invalid");
             document.getElementById('message').closest('div.alert').classList.add('d-none');

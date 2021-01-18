@@ -1,4 +1,4 @@
-
+'use strict';
 /**
  *
  * Rule Messages To Show When Exception Is Thrown 
@@ -28,4 +28,5 @@ const InputRuleMessageException = function(){
 		"matchId": "The :title should match with :option",
 	};
 };
+
 export default InputRuleMessageException;

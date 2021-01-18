@@ -1,3 +1,4 @@
+'use strict';
 
 /**
  *  Rules for validation.
@@ -6,7 +7,8 @@
  */
 
  const Rule = function(element){
- 	this.element = element;
+	 this.element = element;
+	 return this;
  };
 
 
@@ -16,11 +18,11 @@
  };
 
  Rule.prototype.max = function() {
- 	return parseInt(this.element.value) < parseInt(arguments[0]);
+ 	return parseInt(this.element.value) <= parseInt(arguments[0]);
  };
 
  Rule.prototype.min = function() {
- 	return parseInt(this.element.value) > parseInt(arguments[0]);
+ 	return parseInt(this.element.value) >= parseInt(arguments[0]);
  };
 
  Rule.prototype.between = function() {
@@ -66,11 +68,11 @@
  };
 
  Rule.prototype.minLength = function() {
- 	return this.element.value.length > arguments[0];
+ 	return this.element.value.length >= arguments[0];
  };
 
  Rule.prototype.maxLength = function() {
- 	return this.element.value.length < arguments[0];
+ 	return this.element.value.length <= arguments[0];
  };
 
  Rule.prototype.match = function() {
