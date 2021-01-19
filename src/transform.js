@@ -1,5 +1,6 @@
 import Rule from "./rule";
 import InputRuleMessageException from "./message";
+import {formatString} from "./util/Transformers";
 
 /**
  *  Single Input Field Validation
@@ -46,20 +47,22 @@ import InputRuleMessageException from "./message";
         var _this = this;
         var validFormat = _this.formatArgs[0];
         var key = e.key;
-        e.target.value += " ";
-        const format = [
-            "X", 
-            "x",
-            "A",
-            "a", 
-            "n", 
-            "N",
-            "S",
-            "*"
-        ];
-        console.log(e.key, e.keyCode);
-        return true;
+        
+		var regex = new RegExp("^[a-zA-Z0-9 ]+$");
+		var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+		if (regex.test(str)) {
+			e.target.value = formatString(e.target.value ,validFormat);
+		}
+        
      }
+	 
+
+	 pasteEvent(e){
+        const validFormat = this.formatArgs[0];
+		setTimeout(function(){
+			e.target.value = formatString(e.target.value ,validFormat);
+		}, 100);
+	 }
 
      transform(){
         this.formatArgs = arguments[0];
@@ -69,6 +72,7 @@ import InputRuleMessageException from "./message";
         }
         this.keyDownEvent.bind(_this);
         this.el.addEventListener("keydown", this.keyDownEvent.bind(_this));
+        this.el.addEventListener("paste", this.pasteEvent.bind(_this));
      }
 
  }

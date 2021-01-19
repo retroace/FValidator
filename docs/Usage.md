@@ -37,23 +37,58 @@ If you want to get different title in validation message of the input. You can p
 
 ### Rules
 
-These are default rules
+This library provides useful default validation rules.
 
- - required  (Adds required field when form submits)
- - max:maxNumber  (Number should be above maxNumber)
- - min:minNumber  (Number should be above minNumber)
- - between:min,max  (Number should be between min and max)
- - email  (Provided input should have email format)
- - numeric  (Provided input should be a number)
- - alphanumeric  (Provided input should have only alphabets and numbers)
- - nospace  (Provided input should be not have space)
- - in:arg1,arg2,arg3,...  (Provided input should be one of provided arg)
- - inLower:arg1,arg2,arg3,...  (Provided input should be one of provided arg. This is case insensitive)
- - prefix:prefixWith  (Provided input should be prefixed the arg)
- - digit:n  (Provided input should have ***n*** number of digits)
- - minLength:min  (Provided input should have morethan ***min** length)
- - maxLength  (Provided input should have lessthan ***max** length)
- - match:selector  (Provided input should match with the provided ***selector*** value)
- - matchName:selector  (Provided input should match with the provided ***selector*** name attribute value)
- - matchId:selector  (Provided input should match with the provided ***selector*** id attribute value)
- - password  (Provided input should contain one small and one capital letter)
+ - **required**  
+    Adds required field when form submits
+
+ - **max:maxNumber**  
+    Number should be above maxNumber
+
+ - **min:minNumber**  
+    Number should be above minNumber
+
+ - **between:min,max**  
+    Number should be between min and max
+
+ - **email**  
+    Provided input should have email format
+
+ - **numeric**  
+    Provided input should be a number
+
+ - **alphanumeric**  
+    Provided input should have only alphabets and numbers
+
+ - **nospace**  
+    Provided input should be not have space
+
+ - **in:arg1,arg2,arg3,...**  
+    Provided input should be one of provided arg
+
+ - **inLower:arg1,arg2,arg3,...**  
+    Provided input should be one of provided arg. This is case insensitive
+
+ - **prefix:prefixWith**  
+    Provided input should be prefixed the arg
+
+ - **digit:n**  
+    Provided input should have ***n*** number of digits
+
+ - **minLength:min**  
+    Provided input should have morethan ***min** length
+
+ - **maxLength**  
+    Provided input should have lessthan ***max** length
+
+ - **match:selector**  
+    Provided input should match with the provided ***selector*** value
+
+ - **matchName:selector**  
+    Provided input should match with the provided ***selector*** name attribute value
+
+ - **matchId:selector**  
+    Provided input should match with the provided ***selector*** id attribute value
+
+ - **password**  
+    Provided input should contain one small and one capital letter
