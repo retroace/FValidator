@@ -37,7 +37,7 @@ Let's say we want this type of input from user
 ``` 
 To use this type of input we provide 
 
-```
+
 
 ```
 <input 
@@ -45,5 +45,4 @@ To use this type of input we provide
 	data-fvalid-transform="NNN ANANANANAN"
 	placeholder="Your Phone Number"
 />
-```
 ```
