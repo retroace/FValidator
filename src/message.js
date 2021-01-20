@@ -13,7 +13,7 @@ const InputRuleMessageException = function(){
 		"in": "The :title must be one of :option",
 		"inLower": "The :title must be in :option",
 		"numeric": "The :title must be an integer",
-		"alphanumeric": "The :title must be an length",
+		"alphanumeric": "The :title should only contain alphabets and number",
 		"nospace": "The :title must be not have space",
 		"email": "Please enter valid email format",
 		"max": "The :title should be below :option",
@@ -26,6 +26,9 @@ const InputRuleMessageException = function(){
 		"match": "The :title should match with :option",
 		"matchName": "The :title should match with :option",
 		"matchId": "The :title should match with :option",
+		"alpha": "The :title must contain only alphabets",
+		"alphabet": "Input must be an alphabet",
+		"number": "Input must be a number",
 	};
 };
 

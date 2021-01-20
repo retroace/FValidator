@@ -41,6 +41,11 @@
  	return (new RegExp(/^[a-z0-9]+$/i)).test(this.element.value);
  };
 
+
+ Rule.prototype.alpha = function() {
+ 	return (new RegExp(/^[a-z]+$/i)).test(this.element.value);
+ };
+
  Rule.prototype.nospace = function() {
  	return !(/\s/.test(this.element.value));
  };
@@ -54,9 +59,6 @@
  	return Array.isArray(arguments) ? arguments.includes(this.element.value.trim().toLowerCase()): false;
  };
 
- Rule.prototype.format = function() {
- 	return Array.isArray(arguments) ? arguments.includes(this.element.value.trim().toLowerCase()): false;
- };
 
  Rule.prototype.prefix = function() {
  	return this.element.value.trim().startsWith(arguments[0]);
@@ -89,8 +91,5 @@
  	return this.element.closest('form') && this.element.closest('form').querySelector(selector) && (this.element.closest('form').querySelector(selector).value == this.element.value);
  };
 
- Rule.prototype.password = function() {
- 	return this.element.value.match(/^[A-Za-z]\w{6,24}$/);
- };
 
  export default Rule;

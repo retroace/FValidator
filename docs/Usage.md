@@ -21,7 +21,6 @@ Starting with form validation is easy. For simple validation you can just use
 ```
 
 
-
 For the validation you can put it in html element with data attributes. Just use **data-fvalid-{type}** (where type is type/submit/change). For a simple email validation with min length of 10 char you need to give it as given below
 
 ```
@@ -59,6 +58,9 @@ This library provides useful default validation rules.
 
  - **alphanumeric**  
     Provided input should have only alphabets and numbers
+
+ - **alpha**  
+    Provided input should have only alphabets
 
  - **nospace**  
     Provided input should be not have space

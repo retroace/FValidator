@@ -4,7 +4,11 @@
 Form validator is vanilla js based form validation library. This library aims to provide simple,
 elegant form validation. 
 
-[Documentation](https://github.com/retroace/FValidator/blob/master/docs/Usage.md)
+### [Documentation]
+
+- [Introduction](https://github.com/retroace/FValidator/blob/master/docs/Introduction.md)
+- [Usage](https://github.com/retroace/FValidator/blob/master/docs/Usage.md)
+- [Rules](https://github.com/retroace/FValidator/blob/master/docs/Rule.md)
 
 
 Environments in which to use FValidator
@@ -12,6 +16,9 @@ Environments in which to use FValidator
 Current FValidator only has
 
 - [Browser support]
+
+
+
 
 
 

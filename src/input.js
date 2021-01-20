@@ -145,7 +145,6 @@ InputValidator.prototype = {
 		
 		var valid = this.validateGivenArgs.bind(_this).call();
 		
-		
 		var isValid = valid.every(function(item){ return item.valid === true;});
 		
 		if(isValid){
@@ -153,8 +152,8 @@ InputValidator.prototype = {
 		}
 		
 		var message = valid
-		.map(function(o) {return o.message == undefined ? null: o.message;})
-		.filter(function(x){ return x!= null;});
+			.map(function(o) {return o.message == undefined ? null: o.message;})
+			.filter(function(x){ return x!= null;});
 		
 		if(this.option.onInvalid && message.length) this.option.onInvalid.call(_this.el,message);
 		return isValid;
