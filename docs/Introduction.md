@@ -10,7 +10,7 @@ cdn or pull the js file in browser and get started.
 ## Simple Usage
 
 To get started you need to use html5 data attributes for validation. This library already provides
-basic validations for you but you can extend the [rules](https://github.com/retroace/FValidator/blob/master/docs/Rule.md) to suit your needs.
+basic validations for you but you can extend the [rules](Rule.md) to suit your needs.
 
 To validate any element use **data-fvalid-type="rule1:arg1,arg2"** this type of syntax. An example
 of this is
