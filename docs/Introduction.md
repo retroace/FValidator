@@ -24,6 +24,8 @@ of this is
 	/>
 ```
 
+> You can also bail from the validation by putting **bail** option. This makes the validation proceed on the order of the given type 
+
 ## Input Mutator
 
 Sometimes what you might want to specify through validation for some fields. To express those using this

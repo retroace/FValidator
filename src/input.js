@@ -30,11 +30,11 @@ const InputValidator = function (selector ,option = {}){
 	}
 
 	owner.rule = new owner.option.rule(owner.el);
-	owner.message = new owner.option.message();
+	owner.message = new owner.option.message(owner.option.locale);
 	owner.form = owner.el.closest('form');
 	
 	owner.init();
-	return this;
+	return owner;
 	
 };
 
@@ -70,6 +70,7 @@ InputValidator.prototype = {
 			onInvalid : null,
 			onValid : null,
 			rule: Rule,
+			locale: 'en',
 			message: InputRuleMessageException
 		};
 		
@@ -77,7 +78,7 @@ InputValidator.prototype = {
 		return this.option;
 	},
 	
-	getMessage: function(functionName, option){
+	getMessage: function(functionName, option, locale = 'en'){
 		var message = this.message[functionName];
 		if(message == undefined || message == null || message.length <= 1){
 			return null;
@@ -99,7 +100,8 @@ InputValidator.prototype = {
 	
 	validateGivenArgs: function(e){
 		var _this = this;
-		if(this.args == null || !this.args.length){
+		let validationArgs = this.args;
+		if(validationArgs == null || !validationArgs.length){
 			return [
 				{
 					valid: true,
@@ -107,36 +109,51 @@ InputValidator.prototype = {
 				}
 			];
 		}
-		return this.args.map(function(fnName){
-			var functionAndArgs = fnName.split(":");
-			var functionName = functionAndArgs[0];
-			var functionParam = functionAndArgs[1];
+		
+		const hasBail = validationArgs.includes('bail');
+		if(hasBail) { validationArgs = validationArgs.filter(arg => arg != 'bail'); }
+
+		let isInvalid = false;
+		const validationResult = [];
+		for (let i = 0; i < validationArgs.length; i++) {
+			let functionAndArgs = validationArgs[i].split(":"); 
+			let functionName = functionAndArgs[0];
+			let functionParam = functionAndArgs[1];
 			
 			if(functionName == "undefined" || typeof _this['rule'][functionName] != "function"){
 				console.error(functionName +" must be a function");
-				return;
+				continue;
 			}
-			
+	
+			if(isInvalid && hasBail){
+				break;
+			}
+
 			functionParam = functionAndArgs.length == 2 ? functionParam: null;
 			if(_this['rule'][functionName](functionParam)) {
-				return {
+				validationResult.push({
 					valid: true,
 					type: functionName
-				};
+				});
+				continue;
 			}
 			
-			var messageOption = {
+			let messageOption = {
 				title: _this.getFormTitle(),
 				value: _this.el.value,
 				option: functionParam
 			};
 			
-			return {
+			isInvalid = true;
+			validationResult.push({
 				valid: false,
-				message: _this.getMessage(functionName, messageOption),
+				message: _this.getMessage(functionName, messageOption, _this.locale),
 				type: functionName
-			};
-		});
+			});
+		}
+		 
+
+	 return validationResult;
 		
 	},
 	
@@ -145,10 +162,10 @@ InputValidator.prototype = {
 		
 		var valid = this.validateGivenArgs.bind(_this).call();
 		
-		var isValid = valid.every(function(item){ return item.valid === true;});
 		
-		if(isValid){
-			if(this.option.onValid){ this.option.onValid.bind(_this.el).call(); return isValid;}
+		if(valid.every(function(item){ return item.valid === true;})){
+			if(this.option.onValid){ this.option.onValid.bind(_this.el).call();}
+			return true;
 		}
 		
 		var message = valid
@@ -156,7 +173,7 @@ InputValidator.prototype = {
 			.filter(function(x){ return x!= null;});
 		
 		if(this.option.onInvalid && message.length) this.option.onInvalid.call(_this.el,message);
-		return isValid;
+		return false;
 	},
 	
 	getFormTitle: function(){
@@ -207,16 +224,17 @@ InputValidator.prototype = {
 		
 		var valid = this.validateGivenArgs.bind(_this).call();
 		return valid
-		.map(function(o) {
-			o.valid == undefined; 
-			return o.message == undefined ? null:  {
-				title: o.title,
-				message: o.message,
-				type: o.type
-			};
-		})
-		.filter(function(x){ return x!= null;});
+			.map(function(o) {
+				o.valid == undefined; 
+				return o.message == undefined ? null:  {
+					title: o.title,
+					message: o.message,
+					type: o.type
+				};
+			})
+			.filter(function(x){ return x!= null;});
 	}
 	
 }
+
 export default InputValidator;

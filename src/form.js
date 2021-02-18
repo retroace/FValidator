@@ -42,7 +42,8 @@ FValidate.prototype = {
 					onValid: _this.option.onInputValid,
 					onInvalid: _this.option.onInputInvalid,
 					rule: _this.option.rule,
-					message: _this.option.message
+					message: _this.option.message,
+					locale: _this.option.locale
 				});
 				inputValidator.push(validator);
 			});
@@ -70,6 +71,7 @@ FValidate.prototype = {
 			onInvalid : null,
 			onValid : null,
 			
+			locale: "en",
 			rule: Rule,
 			message: InputRuleMessageException,
 			submit: null
@@ -82,7 +84,8 @@ FValidate.prototype = {
 	isValid: function () {
 		return this.inputValidator.map(function(validator){
 			return validator.isValid.bind(validator).apply();
-		}).every(function(x){ return x == true;});
+		})
+		.every(function(x){ return x == true;});
 	},
 	
 	getErrorBag: function() {

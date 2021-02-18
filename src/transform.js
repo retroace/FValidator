@@ -12,12 +12,12 @@ import {formatString} from "./util/Transformers";
 		this.option = {
 			onInvalid : null,
 			onValid : null,
+			excludeSymbolArray: [],
 			rule: Rule,
 			message: InputRuleMessageException
 		};
 
 		this.option = Object.assign({},this.option, option);
-
 		this.init(selector, this.option);
 		return this;
 
@@ -37,13 +37,14 @@ import {formatString} from "./util/Transformers";
 
 		this.rule = new this.option.rule(this.el);
 		this.message = new this.option.message();
+		this.excludeSymbolArray = Array.isArray(this.option.excludeSymbolArray) ? this.option.excludeSymbolArray : [];
 
 		if(this.el.dataset.fvalidTransform){
 			this.validatorAttribute.transform = this.el.dataset.fvalidTransform.split("|");
 			this.transform(this.validatorAttribute.transform);
 		}
-		this.shortcodes = {
 
+		this.shortcodes = {
 			"N": {
 				type:"number",
 				charcodes: ["48-57"] // Numeric Charcodes
@@ -67,13 +68,14 @@ import {formatString} from "./util/Transformers";
 		
 		const BACKSPACE = 8;
 		const DELETE = 127;
+		const TAB = 9;
 
-		if(keyCode == BACKSPACE || keyCode == DELETE){
+		if(keyCode == BACKSPACE || keyCode == DELETE || keyCode == TAB){
 			return true;
 		}
 
 		var text = e.target.value;
-		var shortcodes = validFormat[text.length] || null;
+		var shortcodes = validFormat[e.target.selectionStart] || null;
 		
 		if(shortcodes && shortcodes.trim().length && !this.validateKeyCode(keyCode, shortcodes.toUpperCase())) {
 			e.preventDefault();
@@ -87,9 +89,8 @@ import {formatString} from "./util/Transformers";
 			return false;
 		}
 		
-		
-	   e.target.value = formatString(text ,validFormat);
-	   return true;
+	   	e.target.value = formatString(text ,validFormat, this.excludeSymbolArray);
+	   	return true;
 		
    	}
 

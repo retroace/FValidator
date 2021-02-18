@@ -1,6 +1,6 @@
-export const formatString = function(stringToFormat, format){
+export const formatString = function(stringToFormat, format, excludeArray = []){
     let totalStringLength = stringToFormat.length;
-    let seperators = getSeperatorFromFormat(format.substr(0, totalStringLength + 1));
+    let seperators = getSeperatorFromFormat(format.substr(0, totalStringLength + 1), excludeArray);
     let totalSeperators = seperators.length;
     let addToIndex = 0;
     let string = stringToFormat;
@@ -13,9 +13,10 @@ export const formatString = function(stringToFormat, format){
     return string;
 }
 
-const getSeperatorFromFormat = function(format){
+const getSeperatorFromFormat = function(format, excludeList = []){
+    const excludeArray = excludeList.length ? excludeList : ["-",",",".","/","\\","#","@", " "];
     return format.split("").map((x,index) => {
-            if(!["-",",",".","/","\\","#","@", " "].includes(x)){
+            if(!excludeArray.includes(x)){
                 return null;
             }
             return {
